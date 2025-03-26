@@ -8,10 +8,8 @@ router.get('/vk/start', (req, res) => {
   const apiVersion = '5.131';
 
   // Сформировать ссылку на авторизацию
-  const authUrl = `https://oauth.vk.com/authorize?client_id=${VK_CLIENT_ID}&display=page&redirect_uri=${VK_REDIRECT_URI}&scope=${scope}&response_type=code&v=${apiVersion}`;
-  
+  const authUrl = `https://oauth.vk.com/authorize?client_id=53333212&redirect_uri=https://glazok.onrender.com/auth/vk/callback&scope=email&response_type=code&v=5.131`;
   res.redirect(authUrl);
-});
 
 router.get('/vk/callback', async (req, res) => {
   const code = req.query.code;
