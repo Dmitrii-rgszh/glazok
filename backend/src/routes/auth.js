@@ -10,7 +10,7 @@ router.get('/vk/start', (req, res) => {
   // Сформировать ссылку на авторизацию
   const vkAuthUrl = `https://oauth.vk.com/authorize?client_id=${VK_CLIENT_ID}&display=page&redirect_uri=${VK_REDIRECT_URI}&scope=${scope}&response_type=code&v=${apiVersion}`;
   
-  return res.redirect(vkAuthUrl);
+  res.redirect(authUrl);
 });
 
 router.get('/vk/callback', async (req, res) => {
