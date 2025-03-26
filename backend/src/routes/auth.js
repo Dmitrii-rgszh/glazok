@@ -2,6 +2,7 @@ const router = require('express').Router();
 const axios = require('axios');
 const { User } = require('../models'); // твоя модель
 
+// 1) /auth/vk/start
 router.get('/vk/start', (req, res) => {
   const { VK_CLIENT_ID, VK_REDIRECT_URI } = process.env;
   const scope = 'email'; // какие права запрашиваем
@@ -9,8 +10,11 @@ router.get('/vk/start', (req, res) => {
 
   // Сформировать ссылку на авторизацию
   const authUrl = `https://oauth.vk.com/authorize?client_id=53333212&redirect_uri=https://glazok.onrender.com/auth/vk/callback&scope=email&response_type=code&v=5.131`;
-  res.redirect(authUrl);
 
+  res.redirect(authUrl);
+});  // ← ВАЖНО: закрывающая скобка для маршрута /vk/start
+
+// 2) /auth/vk/callback
 router.get('/vk/callback', async (req, res) => {
   const code = req.query.code;
   if (!code) return res.status(400).send('No code');
@@ -39,7 +43,7 @@ router.get('/vk/callback', async (req, res) => {
       });
     }
 
-    // Тут можно сохранить JWT в куках или просто сообщить, что авторизация успешна
+    // Тут можно сохранить JWT или просто сообщить, что авторизация успешна
     return res.send(`Вы авторизованы. vk_id = ${user_id}`);
   } catch (err) {
     console.error(err);
@@ -48,5 +52,6 @@ router.get('/vk/callback', async (req, res) => {
 });
 
 module.exports = router;
+
 
 
