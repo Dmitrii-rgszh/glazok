@@ -1,27 +1,17 @@
-// backend/src/models/index.js
-
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
 
 const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASS,
+  process.env.DB_NAME,  // glazok_db
+  process.env.DB_USER,  // glazok_db_user
+  process.env.DB_PASS,  // твой пароль
   {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
+    host: process.env.DB_HOST,  // dpg-cvi162dsvqrc73cj5h3g-a
+    port: process.env.DB_PORT,  // 5432
     dialect: 'postgres',
     logging: false,
   }
 );
 
-const db = {};
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+module.exports = { sequelize };
 
-// Подключаем модель User
-db.User = require('./User')(sequelize, Sequelize);
-
-// В дальнейшем: db.Profile = require('./Profile')(...);
-
-module.exports = db;
