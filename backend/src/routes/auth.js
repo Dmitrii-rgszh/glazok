@@ -8,7 +8,7 @@ router.get('/vk/start', (req, res) => {
   const apiVersion = '5.131';
 
   // Сформировать ссылку на авторизацию
-  const AuthUrl = `https://oauth.vk.com/authorize?client_id=${VK_CLIENT_ID}&display=page&redirect_uri=${VK_REDIRECT_URI}&scope=${scope}&response_type=code&v=${apiVersion}`;
+  const authUrl = `https://oauth.vk.com/authorize?client_id=${VK_CLIENT_ID}&display=page&redirect_uri=${VK_REDIRECT_URI}&scope=${scope}&response_type=code&v=${apiVersion}`;
   
   res.redirect(authUrl);
 });
